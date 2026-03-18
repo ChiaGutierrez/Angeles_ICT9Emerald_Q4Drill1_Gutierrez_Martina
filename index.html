@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Q4 Drill 1</title>
+    <style>
+        body {
+          font-family: Arial; 
+          text-align: center;
+           padding: 50px; 
+           background: #f0f0f0; }
+        .box {
+         background: white;
+          padding: 30px; margin: 
+          auto; width: 400px; 
+          border-radius: 10px; }
+        input {
+             border: 2px 
+             solid #ccc;
+              padding: 10px; 
+              font-size: 18px; 
+              width: 150px; }
+        button {
+        background: yellow; 
+        color: black;
+         border: none; 
+         padding: 12px 30px; 
+         font-size: 16px; 
+         font-weight: bold; }
+        .error {
+             background: #ffebee;
+              color: red;
+               border: 2px solid red;
+                padding: 20px;
+                 margin-top: 20px; }
+        .success {
+        background: #e8f5e8; color: green; 
+        border: 2px solid green;
+         padding: 20px; 
+         margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>Electricity Consumption Classifier</h1>
+        <p>Please enter electricity usage in kWh:</p>
+        <br>
+        <input type="number" id="kwh" placeholder="Enter kWh" min="0"><br><br>
+        <button onclick="classify()">Classify Consumption</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function classify() {
+            let kwh = document.getElementById("kwh").value;
+            
+       
+            if (kwh == "" || Number(kwh) < 0) {
+                document.getElementById("result").innerHTML = `
+                    <div class="error">
+                     kWh <span class="highlight">-</span><br>
+                        <span style="font-size: 20px; color: red;">Please enter a valid Consumption Value!</span>
+                    </div>
+                `;
+            } 
+            else {
+                kwh = Number(kwh);
+                let message = "";
+                
+                if (kwh <= 100) {
+                    message = "Lifeline Consumer<br>Discounted electricity rates";
+                }
+                else if (kwh <= 200) {
+                    message = "Low Consumption<br>Normal residential rate";
+                }
+                else if (kwh <= 300) {
+                    message = "Average Consumption<br>Typical electricity usage";
+                }
+                else if (kwh <= 500) {
+                    message = "High Consumption<br>Higher electricity usage";
+                }
+                else {
+                    message = "Very High Consumption<br>Heavy electricity users";
+                }
+                
+                document.getElementById("result").innerHTML = `
+                    <div class="success">
+                       kWh <span class="highlight">${kwh}</span><br>
+                        <span class="highlight">${message}</span>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
